@@ -1,0 +1,214 @@
+<PagarPage>:
+    MDFloatLayout:
+
+        #TITULO TELA DE PAGAMENTOS
+        MDFloatLayout:
+            pos_hint: {"right": 1, "top": 1}
+            size_hint: 1, 0.08
+            radius: [0, 0, 70, 70]
+            md_bg_color: app.theme_cls.primary_color
+
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.7}
+                size_hint: 0.8, 0.07
+                text: "[color=#00CFDB]Despesas: User[/color]"
+                markup: True
+                font_style: "H5"
+                halign: 'center'
+                valign: 'middle'
+                id: label_aviso_pago
+
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.3}
+                size_hint: 0.8, 0.07
+                text: "mes/ano"
+                markup: True
+                halign: 'center'
+                valign: 'middle'
+                id: lbl_mes_referencia
+
+        #CAMPO DESCRICAO
+        MDGridLayout:
+            rows: 1
+            pos_hint: {"right": 0.9, "top": 0.90}
+            size_hint: 0.8, 0.15
+            MDTextField:
+                hint_text: "Descrição"
+                hint_text_color_normal: "orange"
+                text_color_normal: "red"
+                text_color_focus: "blue"
+                line_color_normal: "orange"
+                max_text_length: 15
+                icon_right: "draw-pen"
+                icon_right_color_normal: "red"
+                id:input_desc
+
+
+        #CAMPO VALOR
+        MDGridLayout:
+            rows: 1
+            pos_hint: {"right": 0.9, "top": 0.83}
+            size_hint: 0.8, 0.1
+            MDTextField:
+                hint_text: "Valor"
+                hint_text_color_normal: "orange"
+                text_color_normal: "red"
+                text_color_focus: "blue"
+                line_color_normal: "orange"
+                icon_right: "cash-100"
+                icon_right_color_normal: "red"
+                id:input_valor
+
+        #CAMPO DE DATA
+        MDGridLayout:
+            rows: 1
+            pos_hint: {"right": 0.9, "top": 0.76}
+            size_hint: 0.8, 0.1
+            MDTextField:
+                hint_text: "Data do registro"
+                hint_text_color_normal: "orange"
+                text_color_normal: "red"
+                text_color_focus: "blue"
+                line_color_normal: "orange"
+                icon_right: "calendar"
+                icon_right_color_normal: "red"
+                id:input_data
+
+        #TITULO PAINEL BOTOES CADASTRAR
+        MDLabel:
+            pos_hint: {"right": .9, "top": 0.7}
+            size_hint: 0.8, 0.1
+            text: "[color=#00CFDB]Cadastrar como:[/color]"
+            markup: True
+            font_style: "H5"
+            halign: 'center'
+            valign: 'middle'
+
+        #PAINEL BOTOES CADASTRAR
+        MDFloatLayout:
+            pos_hint: {"right": 1, "top": 0.63}
+            size_hint: 1, 0.17
+
+            #BOTAO CADASTRAR DESPESA
+            MDRaisedButton:
+                text: "Despesa"
+                on_release: app.cadastrar_pagamento("pagamento")
+                pos_hint: {"right": 0.49, "top": 0.95}
+                size_hint: 0.4, 0.45
+                md_bg_color: app.theme_cls.primary_color
+
+            #BOTAO DEVO A
+            MDRaisedButton:
+                text: "Devo a User 00"
+                on_release: app.cadastrar_pagamento("devedor")
+                pos_hint: {"right": 0.9, "top": 0.95}
+                size_hint: 0.39, 0.45
+                id: btn_user_credor
+                md_bg_color: app.theme_cls.primary_color
+
+        #TITULO DE CONTAS FIXAS
+        MDLabel:
+            pos_hint: {"right": .9, "top": 0.53}
+            size_hint: 0.8, 0.1
+            text: "[color=#00CFDB]Contas fixas:[/color]"
+            markup: True
+            font_style: "H5"
+            halign: 'center'
+            valign: 'middle'
+            id: label_aviso
+
+        #PAINEL CONTAS FIXAS
+        MDFloatLayout:
+            pos_hint: {"right": 0.90, "top": 0.45}
+            size_hint: 0.8, 0.20
+            radius: [70, 0, 70, 0]
+            md_bg_color: utils.get_color_from_hex("#006d7e")
+
+            #CAMPO DE ALUGUEL
+            MDGridLayout:
+                rows: 1
+                pos_hint: {"right": 0.9, "top": 0.93}
+                size_hint: 0.8, 0.05
+                MDLabel:
+                    text: "Aluguel: R$0.00"
+                    halign: 'left'
+                    valign: 'middle'
+                    id: lbl_alg_status
+
+                MDRaisedButton:
+                    id: btn_alg_status
+                    size_hint: 0.7, 0.04
+                    text: "Pagar"
+                    on_release: app.pagar_conta_fixa("alg", lbl_alg_status.text)
+                    disabled: False
+                    id: btn_alg_status
+
+
+            #CAMPO DE COND
+            MDGridLayout:
+                rows: 1
+                pos_hint: {"right": 0.9, "top": 0.62}
+                size_hint: 0.8, 0.05
+                MDLabel:
+                    text: "Cond.: R$0.00"
+                    halign: 'left'
+                    valign: 'middle'
+                    id: lbl_cond_status
+
+                MDRaisedButton:
+                    id: btn_cond_status
+                    size_hint: 0.7, 0.04
+                    text: "Pagar"
+                    disabled: False
+                    on_release: app.pagar_conta_fixa("cond", lbl_cond_status.text)
+                    id: btn_cond_status
+
+            #CAMPO DE AGUA
+            MDGridLayout:
+                rows: 1
+                pos_hint: {"right": 0.9, "top": 0.30}
+                size_hint: 0.8, 0.05
+                MDLabel:
+                    text: "Agua: R$0.00"
+                    halign: 'left'
+                    valign: 'middle'
+                    id: lbl_agua_status
+
+                MDRaisedButton:
+                    id: btn_agua_status
+                    size_hint: 0.7, 0.04
+                    text: "Pagar"
+                    disabled: False
+                    on_release: app.pagar_conta_fixa("agua", lbl_agua_status.text)
+                    id: btn_agua_status
+
+        #PAINEL BOTOES OUTRAS TELAS
+        MDFloatLayout:
+            pos_hint: {"right": 1, "top": 0.22}
+            size_hint: 1, 0.17
+
+            #BOTAO CADASTRAR DESPESA
+            MDRaisedButton:
+                text: "Cadastrar contas fixas"
+                on_release: app.ver_aluguel()
+                pos_hint: {"right": 0.49, "top": 0.95}
+                size_hint: 0.4, 0.45
+                md_bg_color: app.theme_cls.primary_color
+
+            #BOTAO DEVO A
+            MDRaisedButton:
+                text: "Ver minhas despesas"
+                on_release: app.acoes_user("Ver minhas despesas")
+                pos_hint: {"right": 0.9, "top": 0.95}
+                size_hint: 0.39, 0.45
+                md_bg_color: app.theme_cls.primary_color
+
+
+        #BOTAO CANCELAR
+        MDRaisedButton:
+            text: "Cancelar"
+            on_release: app.mudar_tela("homepage")
+            pos_hint: {"center_x": .5, "center_y": .05}
+            size_hint: 1, 0.10
+            md_bg_color: app.theme_cls.primary_color
+

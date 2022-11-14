@@ -1,0 +1,85 @@
+<HomePage>:
+    FloatLayout:
+        #IMAGEM LOGOTIPO
+        FitImage:
+            pos_hint: {"right": 1, "top": 1.08}
+            size_hint: 1, 0.3
+            source: "fotos/cc.png"
+
+        MDFloatLayout:
+            pos_hint: {"right": 1, "top": 0.7}
+            size_hint: 1, 0.13
+
+            #LABEL MES ANO REFERENCIA
+            MDLabel:
+                text: "[color=#00CFDB]Escolha mês e ano de referência:[/color]"
+                pos_hint: {"right": 1, "top": .8}
+                size_hint: 1, 0.06
+                font_style: "H6"
+                markup: "True"
+                halign: 'center'
+                valign: 'middle'
+                id: home_aviso
+
+            MDRaisedButton:
+                text: "Mes"
+                on_release: app.abrir_lista_opcoes("menu_mes")
+                pos_hint: {"center_x": .25, "center_y": .25}
+                size_hint: 0.4, 0.06
+                id: btn_mes
+                md_bg_color: app.theme_cls.primary_color
+
+            MDRaisedButton:
+                text: "Ano"
+                on_release: app.abrir_lista_opcoes("menu_ano")
+                pos_hint: {"center_x": .75, "center_y": .25}
+                size_hint: 0.4, 0.06
+                id: btn_ano
+                md_bg_color: app.theme_cls.primary_color
+
+        MDFloatLayout:
+            pos_hint: {"right": 1, "top": 0.7}
+            size_hint: 1, 0.5
+
+            FitImage:
+                pos_hint: {"right":0.45, "top": 0.7}
+                size_hint_x: 0.35
+                size_hint_y: self.size_hint_x
+                source: "fotos/user1.png"
+                radius: 30, 30, 30, 30
+                id: foto_perfil_user1
+
+            FitImage:
+                pos_hint: {"right":0.90, "top": 0.7}
+                size_hint_x: 0.35
+                size_hint_y: self.size_hint_x
+                source: "fotos/user2.png"
+                radius: 30, 30, 30, 30
+                id: foto_perfil_user2
+
+
+
+
+
+
+        MDRectangleFlatButton:
+            text: "User 01"
+            pos_hint: {'center_x': .25, 'center_y': .32}
+            size_hint: .4, .05
+            on_release: app.abrir_lista_opcoes("menu_user1")
+            id: acoes_user1
+
+        MDRectangleFlatButton:
+            text: "User 02"
+            pos_hint: {'center_x': .75, 'center_y': .32}
+            size_hint: .4, .05
+            on_release: app.abrir_lista_opcoes("menu_user2")
+            id: acoes_user2
+
+
+        MDRaisedButton:
+            text: "Opções"
+            on_release: app.abrir_lista_opcoes("menu_telas")
+            pos_hint: {"center_x": .5, "center_y": .05}
+            size_hint: 1, 0.10
+            md_bg_color: app.theme_cls.primary_color

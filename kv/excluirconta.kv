@@ -1,0 +1,83 @@
+<ExcluirConta>
+    FloatLayout:
+
+        MDFloatLayout:
+            pos_hint: {"right": 1, "top": 1}
+            size_hint: 1, 0.08
+            radius: [0, 0, 70, 70]
+            md_bg_color: app.theme_cls.primary_color
+
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.5}
+                size_hint: 0.8, 0.07
+                text: "[color=#000000]Configurações[/color]"
+                markup: True
+                font_style: "H5"
+                halign: 'center'
+                valign: 'middle'
+
+        #TITULO PAGINA LOGIN
+        MDLabel:
+            #markup True permitiu editar o texto em 2 cores (duvida google markup)
+            text: "[color=#00CFDB]Excluir conta[/color]"
+            font_style: "H5"
+            bold: True
+            markup: True
+            pos_hint: {"right": 0.9, "top": 0.90}
+            size_hint: 0.8, 0.2
+            halign: "center"
+
+        #CAMPOS DE INPUT DE EMAIL E SENHA
+        MDTextField:
+            hint_text: "Email"
+            hint_text_color_normal: "orange"
+            text_color_normal: "red"
+            text_color_focus: "blue"
+            line_color_normal: "orange"
+            max_text_length: 15
+            icon_right: "draw-pen"
+            icon_right_color_normal: "red"
+            pos_hint: {"center_x": 0.5, "center_y": 0.70}
+            size_hint: 0.8, 0.10
+            id: email_excluir
+
+        MDTextField:
+            hint_text: "Senha"
+            hint_text_color_normal: "orange"
+            text_color_normal: "red"
+            text_color_focus: "blue"
+            line_color_normal: "orange"
+            max_text_length: 15
+            icon_right: "draw-pen"
+            icon_right_color_normal: "red"
+            password: True
+            pos_hint: {"center_x": 0.5, "center_y": 0.60}
+            size_hint: 0.8, 0.10
+            id: senha_excluir
+
+
+        MDLabel:
+            id: mensagem_excluir
+            text: "[color=#FF0000]Atenção! Sua conta e todas suas informações serão excluidas.[/color]"
+            text_size: self.size
+            markup: True
+            halign: 'center'
+            valign: 'middle'
+            pos_hint: {"right": 0.9, "top": 0.55}
+            size_hint: 0.8, 0.1
+
+        #BOTOES CANCELAR E EXCLUIR CONTA
+
+        MDRectangleFlatButton:
+            on_release: app.firebase.excluir_conta(email_excluir.text, senha_excluir.text)
+            text: "Excluir conta"
+            pos_hint: {'center_x': .50, 'center_y': .37}
+            size_hint: .3, .05
+
+
+        MDRaisedButton:
+            text: "Cancelar"
+            on_release: app.mudar_tela("configpage")
+            pos_hint: {"center_x": .5, "center_y": .05}
+            size_hint: 1, 0.10
+            md_bg_color: app.theme_cls.primary_color

@@ -1,0 +1,55 @@
+<LoginPage>:
+    MDFloatLayout:
+
+        FitImage:
+            pos_hint: {"right": 1, "top": 1.08}
+            size_hint: 1, 0.3
+            source: "fotos/cc.png"
+
+        MDTextField:
+            hint_text: "Email"
+            helper_text: "Digite seu email para entrar"
+            helper_text_mode: "on_focus"
+            pos_hint: {"center_x": 0.5, "center_y": 0.6}
+            size_hint: 0.8, 0.10
+            id: email_input
+
+        MDTextField:
+            hint_text: "Senha"
+            helper_text: "Digite ou crie sua senha"
+            password: True
+            helper_text_mode: "on_focus"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            size_hint: 0.8, 0.10
+            id: senha_input
+
+        MDLabelButton:
+            text: "Esqueci a senha"
+            font_style: "Overline"
+            pos_hint: {"right": 0.9, "top": 0.42}
+            size_hint: 0.8, 0.06
+            halign: "right"
+            on_release: app.mudar_tela("redefinirsenha")
+
+        MDRectangleFlatButton:
+            text: "Entrar"
+            pos_hint: {'center_x': .25, 'center_y': .3}
+            size_hint: .3, .05
+            on_release: app.firebase.fazer_login(email_input.text, senha_input.text)
+            id: btn_entrar
+
+        MDRectangleFlatButton:
+            text: "Criar conta"
+            pos_hint: {'center_x': .75, 'center_y': .3}
+            size_hint: .3, .05
+            on_release: app.firebase.criar_conta(email_input.text, senha_input.text)
+            id: btn_entrar
+
+        MDLabel:
+            text: ""
+            pos_hint: {'center_x': .5, 'center_y': .2}
+            halign: 'center'
+            valign: 'middle'
+            id: mensagem_login
+
+

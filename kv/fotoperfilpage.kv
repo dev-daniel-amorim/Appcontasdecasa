@@ -1,0 +1,56 @@
+<fotoperfilpage>:
+
+    MDFloatLayout:
+        canvas:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        MDFloatLayout:
+            pos_hint: {"right": 1, "top": 0.78}
+            size_hint: 1, 0.5
+
+            FitImage:
+                pos_hint: {"right":0.45, "top": 0.7}
+                size_hint_x: 0.35
+                size_hint_y: self.size_hint_x
+                source: "fotos/user1.png"
+                radius: 50, 50, 50, 50
+                id: foto_perfil_user1
+
+            FitImage:
+                pos_hint: {"right":0.90, "top": 0.7}
+                size_hint_x: 0.35
+                size_hint_y: self.size_hint_x
+                source: "fotos/user2.png"
+                radius: 50, 50, 50, 50
+                id: foto_perfil_user2
+
+
+        MDTopAppBar:
+            pos_hint: {"top": 1}
+            title: "Foto perfil"
+            left_action_items: [["menu", lambda x: None]]
+            elevation: 3
+
+        MDFloatLayout:
+
+            MDRoundFlatIconButton:
+                text: "Foto user1"
+                icon: "folder"
+                pos_hint: {"center_x": .25, "center_y": .3}
+                on_release: app.file_manager_open("foto_user1")
+
+            MDRoundFlatIconButton:
+                text: "Foto user2"
+                icon: "folder"
+                pos_hint: {"center_x": .75, "center_y": .3}
+                on_release: app.file_manager_open("foto_user2")
+
+
+        #BOTAO CANCELAR
+        MDRaisedButton:
+            text: "Sair"
+            on_release: app.mudar_tela("configpage")
+            pos_hint: {"center_x": .5, "center_y": .05}
+            size_hint: 1, 0.10

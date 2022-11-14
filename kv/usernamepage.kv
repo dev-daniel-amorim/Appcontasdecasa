@@ -1,0 +1,85 @@
+<UsernamePage>:
+    MDFloatLayout:
+
+        MDFloatLayout:
+            pos_hint: {"right": 1, "top": 1}
+            size_hint: 1, 0.08
+            radius: [0, 0, 70, 70]
+            md_bg_color: app.theme_cls.primary_color
+
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.5}
+                size_hint: 0.8, 0.07
+                text: "[color=#000000]Configurações[/color]"
+                markup: True
+                font_style: "H5"
+                halign: 'center'
+                valign: 'middle'
+
+        #TITULO TELA NOMES
+        MDLabel:
+            #markup True permitiu editar o texto em 2 cores (duvida google markup)
+            text: "[color=#00CFDB]Defina nomes dos usuários[/color]"
+            font_style: "H5"
+            markup: True
+            pos_hint: {"right": 0.9, "top": 0.90}
+            size_hint: 0.8, 0.08
+            halign: 'center'
+            valign: 'middle'
+
+        #INPUT USER 1
+        MDTextField:
+            hint_text: "Nome usuário 01"
+            pos_hint: {"center_x": 0.5, "center_y": 0.75}
+            size_hint: 0.8, 0.10
+            hint_text_color_normal: "orange"
+            text_color_normal: "red"
+            text_color_focus: "blue"
+            line_color_normal: "orange"
+            max_text_length: 15
+            icon_right: "draw-pen"
+            icon_right_color_normal: "red"
+            id: nome_user1
+
+        #INPUT USER 2
+        MDTextField:
+            hint_text: "Nome usuário 02"
+            pos_hint: {"center_x": 0.5, "center_y": 0.65}
+            size_hint: 0.8, 0.10
+            hint_text_color_normal: "orange"
+            text_color_normal: "red"
+            text_color_focus: "blue"
+            line_color_normal: "orange"
+            max_text_length: 15
+            icon_right: "draw-pen"
+            icon_right_color_normal: "red"
+            id: nome_user2
+
+
+        #LABEL DE AVISO
+        MDLabel:
+            pos_hint: {"right": 0.9, "top": 0.60}
+            size_hint: 0.8, 0.2
+            text: "Preencha com os nomes de usuários que irão dividir as despesas!"
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            color: (1,0,0,1)
+            id: label_aviso
+
+
+        MDRectangleFlatButton:
+            text: "Salvar"
+            pos_hint: {'center_x': .50, 'center_y': .37}
+            size_hint: .3, .05
+            on_release: app.alterar_nome_usuarios(nome_user1.text, nome_user2.text)
+            id: btn_entrar
+
+
+        MDRaisedButton:
+            text: "Cancelar"
+            on_release: app.mudar_tela("configpage")
+            pos_hint: {"center_x": .5, "center_y": .05}
+            size_hint: 1, 0.10
+            md_bg_color: app.theme_cls.primary_color
+

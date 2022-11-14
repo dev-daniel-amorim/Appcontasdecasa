@@ -1,0 +1,199 @@
+<RelatorioPage>
+    FloatLayout:
+
+        MDFloatLayout:
+            pos_hint: {"right": 1, "top": 1}
+            size_hint: 1, 0.08
+            radius: [0, 0, 70, 70]
+            md_bg_color: app.theme_cls.primary_color
+
+            #TITULO DA PAGINA
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.7}
+                size_hint: 0.8, 0.07
+                text: "[color=#000000]Relatório Pagamentos:[/color]"
+                font_style: "H5"
+                markup: True
+                halign: "center"
+                bold: True
+
+            #MES E ANO DE REFERENCIA
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.3}
+                size_hint: 0.8, 0.07
+                text: "[color=#000000]Mês[/color]"
+                markup: True
+                halign: "center"
+                id: relat_mes
+
+        MDFloatLayout:
+            pos_hint: {"right": 0.95, "top": 0.9}
+            size_hint: 0.90, 0.15
+            canvas.before:
+                Color:
+                    rgb: utils.get_color_from_hex("#006d7e")
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 30, 30, 00, 00
+
+            #TITULO USER1
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.79}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Relatório de User 01"
+                font_style: "H6"
+                id: lbl_rel_user1
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.50}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Total pago: 0.00"
+                id: lbl_pago_user1
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.21}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Total devedor: 0.00"
+                id: lbl_dev_user1
+
+        MDFloatLayout:
+            pos_hint: {"right": 0.95, "top": 0.74}
+            size_hint: 0.90, 0.15
+            canvas.before:
+                Color:
+                    rgb: utils.get_color_from_hex("#006d7e")
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 00, 00, 30, 30
+
+            #TITULO USER2
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.79}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Relatório de User 02"
+                font_style: "H6"
+                id: lbl_rel_user2
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.5}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Total pago: 0.00"
+                id: lbl_pago_user2
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.21}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Total devedor: 0.00"
+                id: lbl_dev_user2
+
+        MDFloatLayout:
+            pos_hint: {"right": 0.95, "top": 0.58}
+            size_hint: 0.90, 0.15
+            canvas.before:
+                Color:
+                    rgb: utils.get_color_from_hex("#006d7e")
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 30, 30, 30, 30
+
+            #RESUMO
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.79}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Resumo:"
+                font_style: "H6"
+
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.5}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Despesas totais: 0.00"
+                id: lbl_ttl_desp
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.21}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Total pra cada: 0.00"
+                id: lbl_ttl_cada
+
+        MDFloatLayout:
+            pos_hint: {"right": 0.95, "top": 0.42}
+            size_hint: 0.90, 0.15
+            canvas.before:
+                Color:
+                    rgb: utils.get_color_from_hex("#006d7e")
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 30, 30, 00, 00
+
+            #DIVISAO DESPESAS
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.79}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Divisão de despesas:"
+                font_style: "H6"
+
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.5}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Não á débtos!"
+                id: lbl_quemdeve
+
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.21}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "RS:0.00"
+                id: lbl_vl_deve
+
+        MDFloatLayout:
+            pos_hint: {"right": 0.95, "top": 0.26}
+            size_hint: 0.90, 0.15
+            canvas.before:
+                Color:
+                    rgb: utils.get_color_from_hex("#006d7e")
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 00, 00, 30, 30
+
+            #CONTAS INDIVIDUAIS
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.79}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Contas individuais:"
+                font_style: "H6"
+
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.5}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "Não á débtos!"
+                id: lbl_quemdeveind
+
+            MDLabel:
+                pos_hint: {"right": 0.9, "top": 0.21}
+                size_hint: 0.8, 0.1
+                halign: "center"
+                text: "RS:0.00"
+                id: lbl_vl_deveind
+
+
+
+    #BOTAO SAIR
+    MDRaisedButton:
+        text: "Sair"
+        on_release: app.mudar_tela("homepage")
+        pos_hint: {"center_x": .5, "center_y": .05}
+        size_hint: 1, 0.10
+        md_bg_color: app.theme_cls.primary_color

@@ -1,0 +1,52 @@
+<RedefinirSenha>
+    FloatLayout:
+        canvas:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        #TITULO PAGINA REDEFINIR
+        Label:
+            #markup True permitiu editar o texto em 2 cores (duvida google markup)
+            text: "[color=#00CFDB]Redefinir Senha[/color]"
+            markup: True
+            font_style: "Button"
+            bold: True
+            pos_hint: {"right": 1, "top": 0.89}
+            size_hint: 1, 0.1
+            halign: 'center'
+
+        #INPUT DE EMAIL E SENHA
+        MDTextField:
+            hint_text: "E-mail do administrador"
+            helper_text: "Digite seu email para entrar"
+            helper_text_mode: "on_focus"
+            pos_hint: {"center_x": 0.5, "center_y": 0.70}
+            size_hint: 0.8, 0.10
+            id: email_input
+
+
+        #AVISO
+        MDLabel:
+            pos_hint: {"right": 0.8, "top": 0.62}
+            size_hint: 0.6, 0.20
+            text: "Um email será enviado para redefinição de senha, redefina sua senha e faça login novamente!"
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            id: lbl_aviso
+
+
+
+        #BOTOES DE LOGIN E CRIAR CONTA
+        MDRectangleFlatButton:
+            text: "Cancelar"
+            pos_hint: {'center_x': .25, 'center_y': .3}
+            size_hint: 0.3, 0.05
+            on_release: app.mudar_tela("loginpage")
+            
+        MDRectangleFlatButton:
+            text: "Redefinir"
+            pos_hint: {'center_x': .75, 'center_y': .3}
+            size_hint: 0.3, 0.05
+            on_release: app.firebase.redefinir_senha(email_input.text)

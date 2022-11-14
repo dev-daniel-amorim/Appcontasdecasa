@@ -1,0 +1,52 @@
+#:include kv/loginpage.kv
+#:include kv/usernamepage.kv
+#:include kv/homepage.kv
+#:include kv/pagarpage.kv
+#:include kv/aluguelpage.kv
+#:include kv/scrollpage.kv
+#:include kv/configpage.kv
+#:include kv/excluirconta.kv
+#:include kv/redefinirsenha.kv
+#:include kv/fotoperfilpage.kv
+#:include kv/relatoriopage.kv
+#:import utils kivy.utils
+
+MDFloatLayout:
+
+    MDScreenManager:
+        pos_hint: {"right":1, "top":1}
+        size_hint: 1, 1
+        id:screen_manager
+        LoginPage:
+            name: "loginpage"
+            id: loginpage
+        UsernamePage:
+            name: "usernamepage"
+            id: usernamepage
+        HomePage:
+            name: "homepage"
+            id: homepage
+        PagarPage:
+            name: "pagarpage"
+            id: pagarpage
+        AluguelPage:
+            name: "aluguelpage"
+            id: aluguelpage
+        ScrollPage:
+            name: "scrollpage"
+            id: scrollpage
+        ConfigPage:
+            name: "configpage"
+            id: configpage
+        ExcluirConta:
+            name: "excluirconta"
+            id: excluirconta
+        RedefinirSenha:
+            name: "redefinirsenha"
+            id: redefinirsenha
+        FotoperfilPage:
+            name: "fotoperfilpage"
+            id: fotoperfilpage
+        RelatorioPage:
+            name: "relatoriopage"
+            id: relatoriopage
