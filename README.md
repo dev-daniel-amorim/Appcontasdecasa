@@ -79,41 +79,41 @@ VIRTUAL BOX EM: https://virtualbox.br.uptodown.com/windows
 
 ### Vamos instalar o GIT na maquina virtual (Abra o terminal do linux)
 
-	-sudo apt-get install git
+	sudo apt-get install git
 Digite sua senha ubunto
 
 ### Caso de erro na instalação acima execute os passos abaixo e volte a instalar acima
 
-	-sudo rm -vf /var/lib/apt/lists/*
-	-sudo apt-get update
+	sudo rm -vf /var/lib/apt/lists/*
+	sudo apt-get update
  
 ### Instalando o buildozer
 
-	-git clone https://github.com/kivy/buildozer.git
-	-sudo apt-get install python3.8
-	-sudo apt-get install -y python3-setuptools
+	git clone https://github.com/kivy/buildozer.git
+	sudo apt-get install python3.8
+	sudo apt-get install -y python3-setuptools
  
 ### Instalando setup.py na pasta do buildozer
 
-	-cd buildozer
-	-sudo python3 setup.py install
+	cd buildoze
+	sudo python3 setup.py install
 
 * Saia da pasta do buildozer (cd)
 
 ### Instalar e atualizar todos os pacotes 
 Se der erro reinicie sua máquina virtual
 
-    -sudo apt update
+    sudo apt update
 - Digite sua senha linux
  
 ### Agora vamos instalar vários pacotes necessários para deploy
 
-    -sudo apt install -y git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+    sudo apt install -y git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
 
 ### Vamos instalar nosso ambiente virtual
 
-    -pip3 install --user --upgrade cython virtualenv
-    -sudo apt-get install cython
+    pip3 install --user --upgrade cython virtualenv
+    sudo apt-get install cython
     
 * A partir daqui nossa maquina virtual esta pronta, "não" será necessário repetir os passos acima a cada novo deploy    
 
@@ -133,11 +133,11 @@ git pull https://github.com/DaniellsamorimGit/Appcontasdecasa.git<br>
 
 * Agora na pasta do app:
 
-      -cd [nome do seu app] (ex: cd appcontasdecasa)
+      cd [nome do seu app] (ex: cd appcontasdecasa)
 
 ### Vamos criar o arquivo buildozer.spec
 
-    -buildozer init
+    buildozer init
     
 ### Buildozer configurações
 * Abra o arquivo buldozer no bloco de notas e edite conforme abaixo:
@@ -160,7 +160,7 @@ git pull https://github.com/DaniellsamorimGit/Appcontasdecasa.git<br>
 * Habilite as opcoes de desenvolvedor no celular: marcar debug e sempre ativo
 * Digite no terminal:
 
-      -buildozer android debug deploy run logcat
+      buildozer android debug deploy run logcat
 
 # :construction: PRONTO SE TUDO DER CERTO O APK IRA APARECER NA PASTA INIT E INSTALADO NO SEU SMARTPHONE :construction:
 
