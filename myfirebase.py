@@ -100,8 +100,8 @@ class MyFirebase():
             pagina_login.ids["mensagem_login"].color = (1, 0, 0, 1)
 
     def trocar_token(self, refresh_token):
-        # API REST trocar um token de atualizacao por um id
 
+        # API REST trocar um token de atualizacao por um id
         link = f"https://securetoken.googleapis.com/v1/token?key={self.API_KEY}"
 
         info = {

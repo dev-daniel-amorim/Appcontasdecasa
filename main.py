@@ -41,10 +41,9 @@ class MainApp(MDApp):
     '''
     user_atual = usuário logado
     mes_ref = mes do campo de referêcia
-    ano_ref = ano do campo de referêciareferêcia
+    ano_ref = ano do campo de referêcia
     nome_user1
     nome_user2
-    agora sim
     '''
 
     def __init__(self, **kwargs):
@@ -56,11 +55,13 @@ class MainApp(MDApp):
         )
 
     def build(self):
+        """ Inicia database, telas Kv e define o temado App """
         self.firebase = MyFirebase()
         self.root = Builder.load_file(doc_main_kv)
         self.tema("Dark", "Orange")
 
     def on_start(self):
+        """ Carrega as pré-definições do App """
         self.carregar_infos_usuario()
         # DEFINE O ANO E MES NOS BOTOES DE REFERENCIA
         mes_e_ano = self.pegar_mes()
@@ -68,56 +69,61 @@ class MainApp(MDApp):
         self.definir_ano(mes_e_ano[2])
 
     def tema(self, tema, botoes):
-        #TEMA DO KIVY
-        self.theme_cls.theme_style = tema  # Dark ou Light
+        """ Temas pré definidos do Kivy """
+        self.theme_cls.theme_style = tema
         self.theme_cls.primary_palette = botoes
         '''
-        ThemeManager.primary_palette is ['Red', 'Pink', 'Purple', 'DeepPurple', 'Indigo', 'Blue', 'LightBlue', 'Cyan', 
+        Opções do primary pallete: ['Red', 'Pink', 'Purple', 'DeepPurple', 'Indigo', 'Blue', 'LightBlue', 'Cyan', 
         'Teal', 'Green', 'LightGreen', 'Lime', 'Yellow', 'Amber', 'Orange', 'DeepOrange', 'Brown', 'Gray', 'BlueGray']
+        Opções theme style : Dark ou Light
         '''
         MDScreen()
 
     def carregar_infos_usuario(self):
         try:
+            # Verifica se o usuário tem refresh token para mantê-lo logado
             with open("refreshtoken.txt", "r") as arquivo:
                 refresh_token = arquivo.read()
-            # VER SE USUARIO TEM O REFRESHTOKEN PARA MANTER LOGADO
+
+            # Atualiza os tokens com REST API
             local_id, id_token = self.firebase.trocar_token(refresh_token)
             self.local_id = local_id
             self.id_token = id_token
-            # REQUISIÇÃO INFOS DOS USUARIOS NO DB
+
+            # Requisição do perfil do usuário no database
             requisicao = requests.get(f"https://appcontascasa-d1359-default-rtdb.firebaseio.com/{local_id}"
                                       f".json?auth={self.id_token}")
             requisicao_dic = requisicao.json()
-            # CARREGA FOTOS E NOMES DOS USUÁRIOS
+            # Carrega fotos e nomes dos usuários
             foto_user1 = requisicao_dic["foto_user1"].replace("+", "\\")
             foto_user2 = requisicao_dic["foto_user2"].replace("+", "\\")
             self.nome_user1 = requisicao_dic["nome_user1"]
             self.nome_user2 = requisicao_dic["nome_user2"]
-            #SETA FOTOS E NOMES NO PERFIL DA HOMEPAGE
+            # Seta os dados na tela de homepage
             pagina = self.root.ids["homepage"]
             pagina.ids["foto_perfil_user1"].source = f'{foto_user1}'
             pagina.ids["foto_perfil_user2"].source = f'{foto_user2}'
             pagina.ids["acoes_user1"].text = self.nome_user1
             pagina.ids["acoes_user2"].text = self.nome_user2
-            #SETA FOTOS NO PERFILPAGE
             pagina = self.root.ids["fotoperfilpage"]
             pagina.ids["foto_perfil_user1"].source = f'{foto_user1}'
             pagina.ids["foto_perfil_user2"].source = f'{foto_user2}'
-            #VAI PARA HOMEPAGE
+            # Vai para homepage
             self.mudar_tela("homepage")
         except Exception as ex:
             #toast("Erro (info users)")
             pass
 
-    def seta_nomes_usuarios(self): #CALL: (CONFIGPAGE)
-        # SETA OS CAMPOS DE INPUT DA TELA USERNAMEPAGE COM OS NOMES DE USUÁRIOS
+    def seta_nomes_usuarios(self):
+        """
+        Call: usernamepage
+        Seta os nomes de usuários na tela chamada
+        """
         self.enviar_parametro(pag="usernamepage", id="nome_user1", par="text", dado=self.nome_user1)
         self.enviar_parametro(pag="usernamepage", id="nome_user2", par="text", dado=self.nome_user2)
-        # VAI PRA TELA DE CADASTRO DE NOMES DE USUÁRIOS
         self.mudar_tela('usernamepage')
 
-    def alterar_nome_usuarios(self, nome_user1, nome_user2): #CALL: (USERNAMEPAGE)
+    def alterar_nome_usuarios(self, nome_user1, nome_user2):
         if nome_user1 and nome_user2:
             #PEGA TEXT DOS INPUTS E SETA 1A LETRA MAIUSCULA
             nome_user1 = nome_user1.title()
@@ -138,7 +144,8 @@ class MainApp(MDApp):
         else:
             toast("Preencha todos os nomes!")
 
-    def abrir_lista_opcoes(self, menu):  # ABRE O MENU DE OPÇOES DOS BOTOES
+    def abrir_lista_opcoes(self, menu):
+        """ Abre o menu de opções do botão clicado """
         menu_itens = []
         valor = None
         if menu == "menu_telas":
@@ -175,7 +182,8 @@ class MainApp(MDApp):
                 bottom_sheet_menu.add_item(f"{menu_itens[i]}", lambda x, y=i: function(f"{menu_itens[y]}"))
         bottom_sheet_menu.open()
 
-    def acoes_user(self, acao): #EXECUTA AÇÕES DOS BOTÕES
+    def acoes_user(self, acao):
+        """ Executa a ação da opção escolhida no menu de opções """
         if acao == "Cadastrar despesas":
             self.pagar_conta(self.user_atual)
         if acao == "Ver minhas despesas":
@@ -188,10 +196,12 @@ class MainApp(MDApp):
             self.relatorio_pagamento(self.user_atual, user_2)
 
     def acoes_menu(self, acao):
+        " Executa as ações do menu de configurações (está pronto para receber novas funcionalidades)"
         if acao == "Configurações":
             self.mudar_tela("configpage")
 
-    def pegar_credor(self, user_atual):#PEGA NOME USUÁRIO OPOSTO (CREDOR)
+    def pegar_credor(self, user_atual):
+        """ Pega nome do usuário oposto chamado de credor"""
         if user_atual == self.nome_user1:
             credor = self.nome_user2
         else:
@@ -199,16 +209,16 @@ class MainApp(MDApp):
         return credor
 
     def calcular_resumo_cf(self):
+        """ Calcula o resumo das despesas de acordo com os CHECKBOXs escolhidos """
         try:
             # PEGA OS CAMPOS SETADOS PELO USUÁRIO
             pagina_aluguel = self.root.ids["aluguelpage"]
-
             aluguel_vl = pagina_aluguel.ids["preco_aluguel"].text.replace(",", ".")
             condominio_vl = pagina_aluguel.ids["preco_condominio"].text.replace(",", ".")
             agua_vl = pagina_aluguel.ids["preco_agua"].text.replace(",", ".")
             agua_inclusa = pagina_aluguel.ids["check_agua"].active
             cond_inclusa = pagina_aluguel.ids["check_cond"].active
-
+            # FLOAT GARANTE QUE O USUARIO ESTA DIGITANDO UM NUMERAL OU CAIRÁ NO EXCEPT
             aluguel = float(aluguel_vl)
             condominio = float(condominio_vl)
             agua = float(agua_vl)
@@ -242,16 +252,17 @@ class MainApp(MDApp):
             else:
                 toast("Cadastre todos os valores!")
         except Exception as ex:
-            toast("Cadastre todos os valores!")
+            toast("Cadastre todos os valores corretamente!")
 
 
     def gravar_pag_aluguel(self, *args):
-        #CAMPO PARA URL DB
+        """ Grava no database os dados de pagamento do aluguel"""
+        # CAMPO PARA URL DB
         campo = self.mes_ref + "_" + self.ano_ref
-        #VERIFICAR CHECKBOX AGUA E CONCOMINIO INCLUSO
+        # VERIFICA CHECKBOX AGUA E CONDOMINIO SE INCLUSO
         check_agua = self.pegar_parametro(pag="aluguelpage", id="check_agua", par="active")
         check_cond = self.pegar_parametro(pag="aluguelpage", id="check_cond", par="active")
-        #CADASTRAR VALORES NO DB
+        # CADASTRA VALORES NO DATABASE
         link = f"https://appcontascasa-d1359-default-rtdb.firebaseio.com/{self.local_id}/aluguel/{campo}.json?auth={self.id_token}"
         info = f'{{"aluguel": "{args[0]}", "condominio": "{args[1]}", "agua": "{args[2]}", "aluguel_ttl": "{args[3]}",' \
                f' "condominio_ttl": "{args[4]}", "agua_ttl": "{args[5]}", "check_agua": "{check_agua}",' \
@@ -259,16 +270,16 @@ class MainApp(MDApp):
         requests.patch(link, data=info)
 
     def ver_aluguel(self):
+        """ Mostra na tela os valores de aluguel, água e condomínio cadastrado no banco de dados"""
         ZerarTelas.zerar_contasfixas(self)
         campo = self.mes_ref + "_" + self.ano_ref
 
         try:
-
-            #REQUISICAO DE VALORES DAS CONTAS FIXAS NO DB
+            # REQUISICAO DE VALORES DAS CONTAS FIXAS NO DB
             requisicao = requests.get(f"https://appcontascasa-d1359-default-rtdb.firebaseio.com/{self.local_id}/aluguel/"
                                       f"{campo}.json?auth={self.id_token}")
             requisicao_dic = requisicao.json()
-            # pegar oa valores dos campos no dict
+            # COLHER VALORES VINDO NO DICT JSON
             cond = requisicao_dic["condominio"]
             aluguel = requisicao_dic["aluguel"]
             agua = requisicao_dic["agua"]
@@ -301,9 +312,10 @@ class MainApp(MDApp):
             self.mudar_tela("aluguelpage")
         except Exception as ex:
             self.mudar_tela("aluguelpage")
-            print(ex)
+            #print(ex)
 
     def pagar_conta(self, usuario):
+        """ Vai para tela pagarpage, mas antes verifica as contas pagas e em aberto para exibi-las"""
         #RESET CAMPOS DE PAGARPAGE
         ZerarTelas.zerar_telapagar(self)
         #PEGAR DATA ATUAL
@@ -354,6 +366,7 @@ class MainApp(MDApp):
         self.mudar_tela("pagarpage")
 
     def cadastrar_pagamento(self, tipo):
+        """ Cadastra um pagamento e muda para tela scrollpage para exibir a lista de pagametos feitos"""
         #PEGA OS INPUTS DO USUARIO PARA FAZER A REQUISIÇÃO POST NO DB
         descricao = self.pegar_parametro(pag="pagarpage", id="input_desc", par="text").title()
         data = self.pegar_parametro(pag="pagarpage", id="input_data", par="text")
@@ -383,6 +396,7 @@ class MainApp(MDApp):
             toast(f"Preencha os campos corretamente!")
 
     def pagar_conta_fixa(self, *args):
+        """ Exibe (a pagar) ou desativa (já pagos) os botoes de pagamentos de contas fixas """
         # PREENCHE OS DADOS DO BOTAO DE CONTAS FIXAS
         if args[0] == "alg":
             descricao = args[1][0:7] + "_" + self.mes_ref + "_" + self.ano_ref
@@ -400,6 +414,7 @@ class MainApp(MDApp):
         self.cadastrar_pagamento("pagamentos")
 
     def apagar_item_lista(self, user):
+        """ Apaga items da lista do scroolpage e deleta do Database de acordo com o código do item"""
         # PREENCHE O CAMPO PARA REQUISICAO DB
         cod_user = self.pegar_cod_ou_credor(self.user_atual)[0]
         campo = cod_user + "_" + self.mes_ref + "_" + self.ano_ref
@@ -434,6 +449,7 @@ class MainApp(MDApp):
             toast("Digite um código para excluir da lista!")
 
     def limpar_banner(self):
+        """ Remove item excluido da lista pagamento ou lista de dividas da scroolpage """
         #REMOVE OS DADOS DA LISTA_PAGAMENTOS
         lista_pagamentos = self.pegar_parametro(pag="scrollpage", id="lista_pagamentos", par="id")
         for item in list(lista_pagamentos.children):
@@ -444,6 +460,7 @@ class MainApp(MDApp):
             lista_dividas.remove_widget(item)
 
     def preencher_banner(self, *args):  # recebe: usuario[0], spinner mes[1], spinner ano[2] e credor[3]
+        """ Preenche o banner na scroolpage para consulta dos dados """
         # LIMPA O BANNER PARA ENTRADA DE NOVOS DADOS
         self.limpar_banner()
         self.enviar_parametro(pag="scrollpage", id="code_input", par="text", dado="")
@@ -480,6 +497,7 @@ class MainApp(MDApp):
         self.mudar_tela("scrollpage")
 
     def publicar_banner(self, *args):  # recebe lista e requisicao_dic e soma
+        """ Soma os valores da lista de pagamentos e dividas para exibir no scroolpage """
         soma = 0
         try:
             for local_id_user in args[1]:
@@ -498,6 +516,7 @@ class MainApp(MDApp):
             pass
 
     def ver_status_contas(self, *args):
+        """ Verifica as contas fixas pagas para exibir os botoes de pagamentos habilitados ou não"""
         lista = []
         try:
             campo = "user1" + "_" + self.mes_ref + "_" + self.ano_ref
@@ -522,6 +541,7 @@ class MainApp(MDApp):
                 self.enviar_parametro(pag="pagarpage", id="btn_agua_status", par="text", dado="Pago")
 
     def relatorio_pagamento(self, *args):  # recebe: user1, user2
+        """ Calcula os valores pagos pelos usuários para exibir o relatorio em relatoriopage"""
 
         cod_userx = self.pegar_cod_ou_credor(args[0])[0]
         cod_usery = self.pegar_cod_ou_credor(args[1])[0]
@@ -588,6 +608,7 @@ class MainApp(MDApp):
         self.mudar_tela("relatoriopage")
 
     def pegar_total_pago(self, *args): #recebe user, mes, ano e raiz
+        """ calcula o total pago pelo usuário solicitado de acordo com mes e ano"""
         total = 0
         try:
             campo = args[0] + "_" + args[1] + "_" + args[2]
@@ -601,8 +622,8 @@ class MainApp(MDApp):
         except:
             return total
 
-    def criar_lista(self, campo, lista):  # PEGA LISTA DE PAGAMENTOS(CAMPO = USER+MES+ANO)
-
+    def criar_lista(self, campo, lista):
+        """ Cria a lista de pagametos realizados pelo usuário por mes e ano"""
         requisicao = requests.get(
             f"https://appcontascasa-d1359-default-rtdb.firebaseio.com/{self.local_id}/pagamentos/{campo}.json?auth={self.id_token}")
         dic = requisicao.json()
@@ -611,6 +632,7 @@ class MainApp(MDApp):
         return lista
 
     def show_alert_dialog(self):
+        """ Caixa de dialogo sair da conta, remove o token que mantem usúario logado e sai da conta"""
         self.dialog = ""
         if not self.dialog:
             self.dialog = MDDialog(
@@ -632,23 +654,36 @@ class MainApp(MDApp):
         self.dialog.open()
 
     def fechar_tela(self, obj):
+        """ Fecha a caixa de dialogo"""
         self.dialog.dismiss()
 
     def opcao(self, obj):
+        """ Faz logoff removendo o token que mantinha usuário logado"""
         self.dialog.dismiss()
         self.fazer_logoff()
 
     def fazer_logoff(self):
+        """ Remove o token de usuário logado """
         path = os.path.join("refreshtoken.txt")
         os.remove(path)
         self.mudar_tela("loginpage")
 
     def mudar_tela(self, id_tela):
+        '''
+        Função que muda para tela solicitada de acordo com seu ID
+        :param id_tela (str): ID da tela solicitada;
+        '''
         gerenciador_telas = self.root.ids["screen_manager"]
         gerenciador_telas.current = id_tela
 
     def pegar_cod_ou_credor(self, usuario):
-        #PEGA CODIGO DO USUÁRIO E NOME CREDOR
+        '''
+        Pega o código e o nome do usuário oposto (credor)
+        :param usuario (str): Nome do usuário que esta solicitando;
+        :returns
+            cod_user (str): retorna código do usuário que esta solicitando;
+            credor (str): retorna o nome do usuário oposto (credor);
+        '''
         if usuario == self.nome_user1:
             cod_user = "user1"
             credor = self.nome_user2
@@ -658,6 +693,13 @@ class MainApp(MDApp):
         return cod_user, credor
 
     def enviar_parametro(self, pag, id, par, dado):
+        '''
+        Envia um parâmetro para um item da página KV solicitada;
+        :param pag (str): Nome da página;
+        :param id (str): Id da página;
+        :param par (str): Parametro que deseja mudar text, color, hint_text, active, disable ou source;
+        :param dado (str): Dado a ser setado no item (ex: par=color dado=preto);
+        '''
         tela = self.root.ids[pag]
         if par == "text":
             tela.ids[id].text = dado
@@ -673,6 +715,13 @@ class MainApp(MDApp):
             tela.ids[id].source = dado
 
     def pegar_parametro(self, pag, id, par):
+        '''
+        Pega um parâmetro da página KV solicitada.
+        :param pag (str): Nome da página solicitada;
+        :param id (str): ID da página solicitada;
+        :param par (str): Parametro que deseja pegar text, active ou id de algum item na página;
+        :return (str): Retorna o dado solicitado do item KV
+        '''
         tela = self.root.ids[pag]
         if par == "text":
             dado = tela.ids[id].text
@@ -683,17 +732,32 @@ class MainApp(MDApp):
         return dado
 
     def definir_mes(self, mes):
+        '''
+        Seta o nome do botão mes para o mes escolhido da consulta
+        :param mes (str): Mes escollhido pelo usuário
+        '''
         btn = self.root.ids["homepage"]
         btn.ids["btn_mes"].text = mes
         self.mes_ref = mes
     def definir_ano(self, ano):
+        '''
+        Seta o nome do botão ano para o ano escolhido da consulta
+        :param ano (str): Ano escollhido pelo usuário
+        '''
         btn = self.root.ids["homepage"]
         btn.ids["btn_ano"].text = ano
         self.ano_ref = ano
 
 
     def pegar_mes(self):  # RETORNA(DATA DE HOJE[0], MES POR EXTENSO[1], ANO[2] E DICT DE MESES[3])
-
+        '''
+        Função para facilitar o uso de datas em nosso app.
+        :returns
+            data (str): retorna a data de hoje;
+            mes_extenso (str): retorna mes escrito por extenso;
+            ano (str): retorna ano;
+            mes_dic (dict): retorna um dicionario de meses do ano;
+        '''
         today = date.today()
         data = today.strftime("%d/%m/%Y")
         mes = today.strftime("%m")
@@ -717,17 +781,19 @@ class MainApp(MDApp):
         mes_extenso = mes_dic[mes]
         return data, mes_extenso, ano, mes_dic
 
+
+    # FUNÇÕES ABAIXO PARA ABRIR UM ARQUIVO NO SMARTPHONE (NOSSO CASO FOTO DO USUÁRIO)
+    # AINDA NÃO TOTALMENTE IMPLEMENTADO
+
     def file_manager_open(self, user):
         self.user_foto = user
-        self.file_manager.show(os.path.expanduser("~"))  # output manager to the screen
+        self.file_manager.show(os.path.expanduser("~"))
         self.manager_open = True
 
     def select_path(self, path: str):
         '''
-        It will be called when you click on the file name
-        or the catalog selection button.
-
-        :param path: path to the selected directory or file;
+        Função chamada quando clicado no nome do diretório ou arquivo
+        :param path: Caminho para o diretório ou arquivo;
         '''
 
         self.exit_manager()
