@@ -53,19 +53,19 @@ https://user-images.githubusercontent.com/115194365/201999393-52029d4d-1e52-4ae7
 | :---: | 
 
 
-Mais sobre o autor: 
-Graduado em Engenharia de computação em 2010 pela Universidade Potiguar do RN;
-Pós-graduado em Petróleo e gás;
-Desenvolvedor de dispositivos embarcados, microcontrolados, automação de sistemas;
-Desenvolvedor de placas de CI, prototipagem e desenvolvimento;
-Amante de tecnologias e desenvolvimento Python.
+#### Mais sobre o autor: <br>
+Graduado em Engenharia de computação em 2010 pela Universidade Potiguar do RN;<br>
+Pós-graduado em Petróleo e gás;<br>
+Desenvolvedor de dispositivos embarcados, microcontrolados, automação de sistemas;<br>
+Desenvolvedor de placas de CI, prototipagem e desenvolvimento;<br>
+Amante de tecnologias e desenvolvimento Python.<br>
 
 # Considerações Finais
 
 Até o fim deste projeto o Google estava mudando suas políticas de deploy de App's na Play Store, por este motivo o 
 App Contas de casa não foi publicado na plataforma do Google. Mas o arquivo APK deste projeto foi gerado, em breve irei
-disponibilizar aqui o APK para download, mas quem tiver curiosidade de como gerar um APK para publicação segue abaixo 
-um breve tutorial (linux) de como fazer deploy de aplicativos.
+disponibilizar aqui o APK para download, mas quem tiver curiosidade de como gerar um APK para publicação (versão debug) segue abaixo 
+um breve tutorial (linux) de como fazer deploy de aplicativos (em breve passo a passo deploy versão release).
 
 # Tutorial Deploy
 
@@ -162,72 +162,67 @@ git pull https://github.com/DaniellsamorimGit/Appcontasdecasa.git<br>
 
       -buildozer android debug deploy run logcat
 
+# :construction: PRONTO SE TUDO DER CERTO O APK IRA APARECER NA PASTA INIT E INSTALADO NO SEU SMARTPHONE :construction:
+
+## Obs: É comum no meio do processo surgirem, mas não desanime, abaixo listei algumas soluções para erros mais comuns:
 
 
+#### ERRO COM JAVA TENTE:<br>
 
-ABAIXO CASO DER ERROS VAI TENTANDO:
-------------------------------------------------------------------------
+    sudo add-apt-repository ppa:linuxuprising/java 
+    sudo apt install oracle-java17-installer --install-recommends
 
-ERRO COM JAVA TENTE:
-sudo add-apt-repository ppa:linuxuprising/java 
-sudo apt install oracle-java17-installer --install-recommends
+#### ERRO COM KIVY TENTE:<br>
+    sudo apt-get install python3-pip
+    sudo apt-get purge python3-kivy
 
-OBS: erro com clock resolvi com esse passo!
--------------------------------------------------------------------------
+##### depois veja a versão do python:
+    python3 -V
 
-ERRO COM KIVY TENTE:
-sudo apt-get install python3-pip
-sudo apt-get purge python3-kivy
-
-DEPOIS VEJA A VERSAO DO PYTHON:
-python3 -V
-
-ACESSE A PAGINA:
+##### acesse a pagina:
 https://kivy.org/downloads/ci/linux/kivy/
 
-E COPIE O LINK REFERENTE A VERSAO DO SEU PYTHON
-(SE SEU PC FOR INTEL ESCOLHA X86_64, E PARA AMD ESCOLHA AARCH64)
+##### na página copie o link referente a sua versão do python
+(Se seu PC for intel escolha X86_64, e para AMD escolha AARCH64)
 RODE O COMANDO ABAIXO JUNTO COM O LINK COPIADO:
 
-python3 -m pip install https://kivy.org/downloads/ci/linux/kivy/Kivy-2.2.0.dev0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl --user
+    python3 -m pip install https://kivy.org/downloads/ci/linux/kivy/Kivy-2.2.0.dev0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl --user
 
-ABAIXO COMANDO SEM O LINK:
-python3 -m pip install ((((((endereco_do_link)))))) --user
----------------------------------------------------------------------------
-
-ERRO COM PIL TENTE:
+#### ERRO COM PIL TENTE:
 adicione "pillow" nos requerimentos do buildozer na linha 39
 
 obs: PIL faz parte da biblioteca pillow, eu coloco em todos apps por padrão.
----------------------------------------------------------------------------
 
-ERRO PYTHON3 OU PYTHON3 NÃO ATENTE OS REQUERIMENTOS:
+
+#### ERRO PYTHON3 OU PYTHON3 NÃO ATENTE OS REQUERIMENTOS:
 apague "python3" da lista de requerimentos do buildozzer
----------------------------------------------------------------------------
 
-ERRO GRADLE TENTE:
-sudo apt-get install openjdk-11-jdk
+
+#### ERRO GRADLE TENTE:
+    sudo apt-get install openjdk-11-jdk
 
 obs: atualiza o jdk de 8 para 11
----------------------------------------------------------------------------
 
-USA O KIVYMD? INSTALE TODO O PACOTE:
-pip install --force-reinstall https://github.com/kivymd/KivyMD/archive/master.zip
+#### USA O KIVYMD? INSTALE TODO O PACOTE:
+    pip install --force-reinstall https://github.com/kivymd/KivyMD/archive/master.zip
 
-VAI INSTALAR OS PACOTES ABAIXO:
+Vai instalar: 
 Successfully installed Kivy-Garden-0.1.5 certifi-2022.9.24 charset-normalizer-2.1.1 docutils-0.19 idna-3.4 kivy-2.1.0 kivymd-1.1.0.dev0 pillow-9.2.0 pygments-2.13.0 requests-2.28.1 urllib3-1.26.12
----------------------------------------------------------------------------
 
-DICA:
+
+#### DICA:
 o aplicativo foi instalado no celular mas não abre?
 instale o pacote abaixo para ver o DEBUG, e erros que estão ocorrendo:
-sudo apt install adb
+
+    sudo apt install adb
 
 depois de instalado o ADB, conecte o celular e rode:
-adb logcat -s python
 
-vc verá o erro(caso exista) assim como no RUN do pycharm
-----------------------------------------------------------------------------
+    adb logcat -s python
+
+O erro será apresentado na tela (caso exista) assim como no RUN do pycharm
+
+### SUCESSO!!!
 
 
 
