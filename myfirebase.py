@@ -1,5 +1,5 @@
 import requests
-# importa a classe app prapoder rodar os comandos do meu app
+# importa a classe app pra poder rodar os comandos do meu app
 from kivymd.app import MDApp
 
 
@@ -21,7 +21,7 @@ class MyFirebase():
         # ou se der certo pegamos as chaves
         if requisicao:
 
-            # requisicao_dic["idToken"] #autenticacao de restrincao
+            # requisicao_dic["idToken"] #autenticacao de restricao
             # requisicao_dic["refreshToken"] #token que mantem usuario logado,salva num arquivo e se loga automatico
             # requisicao_dic["localId"] #id do usuario, o codigo que vai identificar a pessoa
 
@@ -100,6 +100,13 @@ class MyFirebase():
             pagina_login.ids["mensagem_login"].color = (1, 0, 0, 1)
 
     def trocar_token(self, refresh_token):
+        '''
+        Atualiza o token que mantem o usuário logado pois ele tem prazo para expirar.
+        :param refresh_token (str): Token atual
+        :returns
+            local_id: Token do usuário logado
+            id_token: Token de restrição do app
+        '''
 
         # API REST trocar um token de atualizacao por um id
         link = f"https://securetoken.googleapis.com/v1/token?key={self.API_KEY}"
@@ -118,6 +125,11 @@ class MyFirebase():
         return local_id, id_token
 
     def redefinir_senha(self, email):
+        '''
+        Manda solicitação de troca de senha através do API REST do google
+        :param email (str): Email do usuário;
+        :return: O retorno da troca de senha é feita através do email do usuário;
+        '''
 
         app = MDApp.get_running_app()
 
@@ -140,6 +152,11 @@ class MyFirebase():
             app.enviar_parametro(pag="redefinirsenha", id="lbl_aviso", par="color", dado=(1, 0, 0, 1))
 
     def excluir_conta(self, email, senha):
+        '''
+        Envia PAI REST do google solicitando exlusão da conta
+        :param email (str): Email do usuário;
+        :param senha (str): Senha do usuário;
+        '''
 
         app = MDApp.get_running_app()
 

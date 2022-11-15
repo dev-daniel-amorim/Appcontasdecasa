@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 
 class ZerarTelas():
+    ''' todas métodos zeram as telas para entrada de novos dados '''
 
     def zerar_telapagar(self):
         app = MDApp.get_running_app()
