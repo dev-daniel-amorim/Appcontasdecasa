@@ -43,6 +43,7 @@ https://user-images.githubusercontent.com/115194365/201999393-52029d4d-1e52-4ae7
 - `KiviMD`
 - `Firebase`
 - `API google rest`
+- `Paradigma de orientação a objetos`
 
 # Desenvolvedor
 
