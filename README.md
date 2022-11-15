@@ -1,5 +1,3 @@
-# Título 
-
 <h1 align="center"> App Contas de casa </h1>
  
  <p align="center">
@@ -9,8 +7,6 @@
 
 # Índice 
 
-* [Título](#título)
-* [Índice](#índice)
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Status](#status)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
@@ -82,7 +78,7 @@ VIRTUAL BOX EM: https://virtualbox.br.uptodown.com/windows
 	sudo apt-get install git
 Digite sua senha ubunto
 
-### Caso de erro na instalação acima execute os passos abaixo e volte a instalar acima
+### Caso de erro na instalação execute os passos abaixo e volte a instalar acima
 
 	sudo rm -vf /var/lib/apt/lists/*
 	sudo apt-get update
@@ -164,7 +160,7 @@ git pull https://github.com/DaniellsamorimGit/Appcontasdecasa.git<br>
 
 # :construction: PRONTO SE TUDO DER CERTO O APK IRA APARECER NA PASTA INIT E INSTALADO NO SEU SMARTPHONE :construction:
 
-## Obs: É comum no meio do processo surgirem, mas não desanime, abaixo listei algumas soluções para erros mais comuns:
+### Obs: É comum no meio do processo surgirem erros, mas não desanime, abaixo listei algumas soluções para erros mais comuns:
 
 
 #### ERRO COM JAVA TENTE:<br>
