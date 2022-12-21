@@ -50,11 +50,11 @@ https://user-images.githubusercontent.com/115194365/201999393-52029d4d-1e52-4ae7
 
 
 #### Mais sobre o autor: <br>
-Graduado em Engenharia de computação em 2010 pela Universidade Potiguar do RN;<br>
+Graduado em Engenharia de computação;<br>
 Pós-graduado em Petróleo e gás;<br>
-Desenvolvedor de dispositivos embarcados, microcontrolados, automação de sistemas;<br>
-Desenvolvedor de placas de CI, prototipagem e desenvolvimento;<br>
-Amante de tecnologias e desenvolvimento Python.<br>
+Desenvolvedor de dispositivos embarcados, C++, Python;<br>
+Tecnologias Django, Flask, Selenium, Pandas, MySQL, HTML, Css e Javascript;<br>
+Áreas de interesse: Desenvolvimento BackEnd, Data science.<br>
 
 # Considerações Finais
 
