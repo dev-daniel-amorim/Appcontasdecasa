@@ -11,9 +11,9 @@
 * [Status](#status)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
+* [Tutorial Deploy](#tutorial-deploy)
 * [Desenvolvedor](#desenvolvedor)
 * [Considerações Finais](#considerações-finais)
-* [Tutorial Deploy](#tutorial-deploy)
 
 # Descrição do projeto
  App para Android e Ios para controle (até 2 pessoas) de contas pessoais mensais como
@@ -42,26 +42,6 @@ https://user-images.githubusercontent.com/115194365/201999393-52029d4d-1e52-4ae7
 - `Firebase`
 - `API rest (Google)`
 - `Paradigma de orientação a objetos`
-
-# Desenvolvedor
-
-| [<img src="https://user-images.githubusercontent.com/115194365/202005566-f6278b6c-4f75-416f-b01c-e79b8d04f02e.jpg" width=115><br><sub>Daniel de Souza Amorim</sub>](https://github.com/DaniellsamorimGit) |
-| :---: | 
-
-
-#### Mais sobre o autor: <br>
-Graduado em Engenharia de computação;<br>
-Pós-graduado em Petróleo e gás;<br>
-Desenvolvedor de dispositivos embarcados, C++, Python;<br>
-Tecnologias Django, Flask, Selenium, Pandas, MySQL, HTML, Css e Javascript;<br>
-Áreas de interesse: Desenvolvimento BackEnd, Data science.<br>
-
-# Considerações Finais
-
-Até o fim deste projeto o Google estava mudando suas políticas de deploy de App's na Play Store, por este motivo o 
-App Contas de casa não foi publicado na plataforma do Google. Mas o arquivo APK deste projeto foi gerado, em breve irei
-disponibilizar aqui o APK para download, mas quem tiver curiosidade de como gerar um APK para publicação (versão debug) segue abaixo 
-um breve tutorial (linux) de como fazer deploy de aplicativos (em breve passo a passo deploy versão release).
 
 # Tutorial Deploy
 
@@ -220,7 +200,25 @@ O erro será apresentado na tela (caso exista) assim como no RUN do pycharm
 
 ### SUCESSO!!!
 
+# Desenvolvedor
 
+| [<img src="https://user-images.githubusercontent.com/115194365/202005566-f6278b6c-4f75-416f-b01c-e79b8d04f02e.jpg" width=115><br><sub>Daniel de Souza Amorim</sub>](https://github.com/DaniellsamorimGit) |
+| :---: | 
+
+
+#### Mais sobre o autor: <br>
+Graduado em Engenharia de computação;<br>
+Pós-graduado em Petróleo e gás;<br>
+Desenvolvedor de dispositivos embarcados, C++, Python;<br>
+Tecnologias Django, Flask, Selenium, Pandas, MySQL, HTML, Css e Javascript;<br>
+Áreas de interesse: Desenvolvimento BackEnd, Data science.<br>
+
+# Considerações Finais
+
+Até o fim deste projeto o Google estava mudando suas políticas de deploy de App's na Play Store, por este motivo o 
+App Contas de casa não foi publicado na plataforma do Google. Mas o arquivo APK deste projeto foi gerado, em breve irei
+disponibilizar aqui o APK para download, mas quem tiver curiosidade de como gerar um APK para publicação (versão debug) segue abaixo 
+um breve tutorial (linux) de como fazer deploy de aplicativos (em breve passo a passo deploy versão release).
 
 
 
